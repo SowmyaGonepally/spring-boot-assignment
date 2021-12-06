@@ -21,7 +21,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-
+   private static final String ADDCATEGORYFORM="add-category-form";
 
     @GetMapping("/listCategories")
     public String listCategories(Model model)
@@ -36,7 +36,7 @@ public class CategoryController {
     {
         Category category=new Category();
         model.addAttribute("category",category);
-        return "add-category-form";
+        return ADDCATEGORYFORM;
     }
 
     @PostMapping("/saveCategory")
@@ -44,7 +44,7 @@ public class CategoryController {
     {
         if(bindingResult.hasErrors())
         {
-            return "add-category-form";
+            return ADDCATEGORYFORM;
         }
         List<Category> categories=categoryService.findAll();
         for (Category tempCategory: categories) {
@@ -63,7 +63,7 @@ public class CategoryController {
     {
         Category category=categoryService.findById(id);
         model.addAttribute("category",category);
-        return "add-category-form";
+        return ADDCATEGORYFORM;
     }
 
     @GetMapping("/deleteCategory")

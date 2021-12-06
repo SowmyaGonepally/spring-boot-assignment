@@ -1,6 +1,6 @@
 package com.sowmya.librarysystem.service;
 
-import com.sowmya.librarysystem.customExceptions.CategoryNotFoundEXception;
+import com.sowmya.librarysystem.custom.exceptions.CategoryNotFoundException;
 import com.sowmya.librarysystem.dao.CategoryRepository;
 import com.sowmya.librarysystem.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService{
         }
         else
         {
-            throw new CategoryNotFoundEXception("Did not find the category!");
+            throw new CategoryNotFoundException("Did not find the category!");
         }
         return category;
     }

@@ -1,6 +1,6 @@
 package com.sowmya.librarysystem.service;
 
-import com.sowmya.librarysystem.customExceptions.BookNotFoundException;
+import com.sowmya.librarysystem.custom.exceptions.BookNotFoundException;
 import com.sowmya.librarysystem.dao.BookRepository;
 import com.sowmya.librarysystem.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;

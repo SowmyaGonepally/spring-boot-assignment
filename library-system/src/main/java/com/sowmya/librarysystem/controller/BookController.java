@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,12 +23,14 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
+    private static final String ADDBOOKFORM="add-book-form";
+    private static final String CATEGORIESATTRIBUTE="categories";
 
 
     @GetMapping("/listBooks")
     public String listBooks(@RequestParam("categoryId") Optional<Integer> categoryId, Model model){
         List<Book> books;
-        if(!categoryId.isPresent())
+        if(categoryId.isEmpty())
         {
              books=bookService.findAll();
         }
@@ -37,10 +38,9 @@ public class BookController {
         {
              books=bookService.findBookByCategory(categoryId.get().intValue());
         }
-        System.out.println(books);
         model.addAttribute("books",books);
         List<Category> categories=categoryService.findAll();
-        model.addAttribute("categories",categories);
+        model.addAttribute(CATEGORIESATTRIBUTE,categories);
         return "list-books";
     }
 
@@ -51,8 +51,8 @@ public class BookController {
         model.addAttribute("book",book);
 
         List<Category> categories=categoryService.findAll();
-        model.addAttribute("categories",categories);
-        return "add-book-form";
+        model.addAttribute(CATEGORIESATTRIBUTE,categories);
+        return ADDBOOKFORM;
     }
 
     @PostMapping("/saveBook")
@@ -62,8 +62,8 @@ public class BookController {
         {
             model.addAttribute("book",book);
             List<Category> categories=categoryService.findAll();
-            model.addAttribute("categories",categories);
-            return "add-book-form";
+            model.addAttribute(CATEGORIESATTRIBUTE,categories);
+            return ADDBOOKFORM;
         }
         bookService.save(book);
 
@@ -76,9 +76,9 @@ public class BookController {
         Book book=bookService.findById(id);
         model.addAttribute("book",book);
         List<Category> categories=categoryService.findAll();
-        model.addAttribute("categories",categories);
+        model.addAttribute(CATEGORIESATTRIBUTE,categories);
 
-        return "add-book-form";
+        return ADDBOOKFORM;
     }
 
     @GetMapping("/deleteBook")
