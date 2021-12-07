@@ -1,5 +1,6 @@
 package com.sowmya.librarysystem.controller;
 
+import com.sowmya.librarysystem.dto.CategoryDto;
 import com.sowmya.librarysystem.entity.Category;
 import com.sowmya.librarysystem.service.BookService;
 import com.sowmya.librarysystem.service.CategoryService;
@@ -21,7 +22,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-   private static final String ADDCATEGORYFORM="add-category-form";
+   private static final String ADD_CATEGORY_FORM ="add-category-form";
 
     @GetMapping("/listCategories")
     public String listCategories(Model model)
@@ -34,25 +35,27 @@ public class CategoryController {
     @GetMapping("/addCategoryForm")
     public String addCategoryForm(Model model)
     {
-        Category category=new Category();
-        model.addAttribute("category",category);
-        return ADDCATEGORYFORM;
+        CategoryDto categoryDto=new CategoryDto();
+        model.addAttribute("category",categoryDto);
+        return ADD_CATEGORY_FORM;
     }
 
     @PostMapping("/saveCategory")
-    public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult)
+    public String saveCategory(@Valid @ModelAttribute("category") CategoryDto categoryDto, BindingResult bindingResult)
     {
         if(bindingResult.hasErrors())
         {
-            return ADDCATEGORYFORM;
+            return ADD_CATEGORY_FORM;
         }
         List<Category> categories=categoryService.findAll();
         for (Category tempCategory: categories) {
-            if (tempCategory.getName().equals(category.getName()))
+            if (tempCategory.getName().equals(categoryDto.getName()))
             {
                 return "error-already-added";
             }
         }
+        Category category=new Category(categoryDto.getName());
+        category.setId(categoryDto.getId());
         categoryService.save(category);
 
         return "redirect:/listCategories";
@@ -63,7 +66,7 @@ public class CategoryController {
     {
         Category category=categoryService.findById(id);
         model.addAttribute("category",category);
-        return ADDCATEGORYFORM;
+        return ADD_CATEGORY_FORM;
     }
 
     @GetMapping("/deleteCategory")

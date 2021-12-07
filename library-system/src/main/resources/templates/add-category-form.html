@@ -29,9 +29,9 @@
     <br>
     <form action="#" th:action="@{/saveCategory}" th:object="${category}" method="post">
         <input type="hidden" th:field="*{id}">
-        Name   <input type="text" th:field="*{Name}" placeholder="Name" class="form-control mb-4 col-4" style="width:500px">
-        <p th:if="${#fields.hasErrors('Name')}" th:errorclass="error" th:errors="*{Name}"></p>
-        <errors path="Name" cssClass="error" />
+        Name   <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4" style="width:500px">
+        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
+        <errors path="name" cssClass="error" />
         <br><br>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>

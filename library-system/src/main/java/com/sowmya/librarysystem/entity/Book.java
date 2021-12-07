@@ -19,17 +19,17 @@ public class Book {
     @NotNull(message = "is required")
     @Size(min=2,message = "please specify at least two characters")
     @Column(name = "name")
-    private String Name;
+    private String name;
 
     @NotNull(message = "is required")
     @Size(min=2,message = "please specify at least two characters")
     @Column(name = "author")
-    private String Author;
+    private String author;
 
     @NotNull(message = "is required")
     @Min(value = 1,message = "a minimum of 1 quantity is required")
     @Column(name = "quantity")
-    private int Quantity;
+    private int quantity;
 
 
     //many books can belong to one category
@@ -41,9 +41,9 @@ public class Book {
     }
 
     public Book(String name, String author, int quantity, Category category) {
-        Name = name;
-        Author = author;
-        Quantity = quantity;
+        this.name = name;
+        this.author = author;
+        this.quantity = quantity;
         this.category = category;
     }
 
@@ -56,27 +56,27 @@ public class Book {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getAuthor() {
-        return Author;
+        return author;
     }
 
     public void setAuthor(String author) {
-        Author = author;
+        this.author = author;
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
 

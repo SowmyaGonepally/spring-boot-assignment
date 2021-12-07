@@ -29,21 +29,21 @@
     <form action="#" th:action="@{/saveBook}" th:object="${book}" method="post">
         <input type="hidden" th:field="*{id}">
      Name
-        <input type="text" th:field="*{Name}" placeholder="Name" class="form-control mb-4 col-4" style="width:500px">
-        <p th:if="${#fields.hasErrors('Name')}" th:errorclass="error" th:errors="*{Name}"></p>
-        <errors path="Name" cssClass="error" />
+        <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 col-4" style="width:500px">
+        <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
+        <errors path="name" cssClass="error" />
      <!--   <p th:if="*{name}=='ab'" th:errorclass="error" th:errors="*{name}"
            th:text="cannot be less"></p>
         <errors path="name" cssClass="error" />
 -->
-        Author   <input type="text" th:field="*{Author}" placeholder="Author" class="form-control mb-4 col-4" style="width:500px">
-        <p th:if="${#fields.hasErrors('Author')}" th:errorclass="error" th:errors="*{Author}"></p>
-        <errors path="Author" cssClass="error" />
+        Author   <input type="text" th:field="*{author}" placeholder="Author" class="form-control mb-4 col-4" style="width:500px">
+        <p th:if="${#fields.hasErrors('author')}" th:errorclass="error" th:errors="*{author}"></p>
+        <errors path="author" cssClass="error" />
 
 
-     Quantity   <input type="number" step="1" min="1" max="500" th:field="*{Quantity}" th:placeholder="Quantity" class="form-control mb-4 col-4" style="width:500px">
-        <p th:if="${#fields.hasErrors('Quantity')}" th:errorclass="error" th:errors="*{Quantity}"></p>
-        <errors path="Quantity" cssClass="error" />
+     Quantity   <input type="number" step="1" min="1" max="500" th:field="*{quantity}" th:placeholder="Quantity" class="form-control mb-4 col-4" style="width:500px">
+        <p th:if="${#fields.hasErrors('quantity')}" th:errorclass="error" th:errors="*{quantity}"></p>
+        <errors path="quantity" cssClass="error" />
 
      Category
         <select class="form-control" th:field="*{category}" id="dropCategory" style="width:500px">

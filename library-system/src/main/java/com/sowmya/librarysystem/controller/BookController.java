@@ -1,5 +1,6 @@
 package com.sowmya.librarysystem.controller;
 
+import com.sowmya.librarysystem.dto.BookDto;
 import com.sowmya.librarysystem.entity.Book;
 import com.sowmya.librarysystem.entity.Category;
 import com.sowmya.librarysystem.service.BookService;
@@ -23,8 +24,8 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
-    private static final String ADDBOOKFORM="add-book-form";
-    private static final String CATEGORIESATTRIBUTE="categories";
+    private static final String ADD_BOOK_FORM ="add-book-form";
+    private static final String CATEGORIES_ATTRIBUTE ="categories";
 
 
     @GetMapping("/listBooks")
@@ -40,31 +41,33 @@ public class BookController {
         }
         model.addAttribute("books",books);
         List<Category> categories=categoryService.findAll();
-        model.addAttribute(CATEGORIESATTRIBUTE,categories);
+        model.addAttribute(CATEGORIES_ATTRIBUTE,categories);
         return "list-books";
     }
 
     @GetMapping("/addBookForm")
     public String addBook(Model model)
     {
-        Book book=new Book();
-        model.addAttribute("book",book);
+        BookDto bookDto=new BookDto();
+        model.addAttribute("book",bookDto);
 
         List<Category> categories=categoryService.findAll();
-        model.addAttribute(CATEGORIESATTRIBUTE,categories);
-        return ADDBOOKFORM;
+        model.addAttribute(CATEGORIES_ATTRIBUTE,categories);
+        return ADD_BOOK_FORM;
     }
 
     @PostMapping("/saveBook")
-    public String saveBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult,Model model)
+    public String saveBook(@Valid @ModelAttribute("book") BookDto bookDto, BindingResult bindingResult,Model model)
     {
         if(bindingResult.hasErrors())
         {
-            model.addAttribute("book",book);
+            model.addAttribute("book",bookDto);
             List<Category> categories=categoryService.findAll();
-            model.addAttribute(CATEGORIESATTRIBUTE,categories);
-            return ADDBOOKFORM;
+            model.addAttribute(CATEGORIES_ATTRIBUTE,categories);
+            return ADD_BOOK_FORM;
         }
+        Book book=new Book(bookDto.getName(),bookDto.getAuthor(),bookDto.getQuantity(),bookDto.getCategory());
+        book.setId(bookDto.getId());
         bookService.save(book);
 
         return "redirect:/listBooks";
@@ -76,9 +79,9 @@ public class BookController {
         Book book=bookService.findById(id);
         model.addAttribute("book",book);
         List<Category> categories=categoryService.findAll();
-        model.addAttribute(CATEGORIESATTRIBUTE,categories);
+        model.addAttribute(CATEGORIES_ATTRIBUTE,categories);
 
-        return ADDBOOKFORM;
+        return ADD_BOOK_FORM;
     }
 
     @GetMapping("/deleteBook")

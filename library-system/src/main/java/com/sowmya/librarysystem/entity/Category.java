@@ -17,7 +17,7 @@ public class Category {
     @NotNull(message = "is required")
     @Size(min = 2,message = "please specify at least two characters")
     @Column(name = "name")
-    private String Name;
+    private String name;
 
     //if a category is deleted, all the corresponding books must be deleted
     //mapped by=category. category refers to the property in Book class
@@ -29,7 +29,7 @@ public class Category {
     }
 
     public Category(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getId() {
@@ -41,11 +41,11 @@ public class Category {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public List<Book> getBooks() {
