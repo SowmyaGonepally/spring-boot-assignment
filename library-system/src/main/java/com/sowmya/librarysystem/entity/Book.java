@@ -2,9 +2,7 @@ package com.sowmya.librarysystem.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "book")
@@ -16,18 +14,14 @@ public class Book {
     private int id;
 
 
-    @NotNull(message = "is required")
-    @Size(min=2,message = "please specify at least two characters")
     @Column(name = "name")
     private String name;
 
-    @NotNull(message = "is required")
-    @Size(min=2,message = "please specify at least two characters")
+
     @Column(name = "author")
     private String author;
 
-    @NotNull(message = "is required")
-    @Min(value = 1,message = "a minimum of 1 quantity is required")
+
     @Column(name = "quantity")
     private int quantity;
 
