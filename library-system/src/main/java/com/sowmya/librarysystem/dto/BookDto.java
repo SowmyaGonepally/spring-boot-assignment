@@ -1,6 +1,7 @@
 package com.sowmya.librarysystem.dto;
 
 import com.sowmya.librarysystem.entity.Category;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Min;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
+@Data
 public class BookDto {
 
 
@@ -37,43 +39,5 @@ public class BookDto {
         this.category = category;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }
