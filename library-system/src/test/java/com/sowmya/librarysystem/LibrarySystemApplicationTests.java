@@ -1,7 +1,6 @@
 package com.sowmya.librarysystem;
 
-import com.sowmya.librarysystem.controller.HomeController;
-import com.sowmya.librarysystem.controller.UserLoginController;
+import com.sowmya.librarysystem.controller.*;
 import com.sowmya.librarysystem.dao.BookRepository;
 import com.sowmya.librarysystem.dao.CategoryRepository;
 import com.sowmya.librarysystem.entity.Book;
@@ -11,10 +10,13 @@ import com.sowmya.librarysystem.service.CategoryService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,6 +35,8 @@ class LibrarySystemApplicationTests {
 	@MockBean
 	private BookRepository bookRepository;
 
+	@Mock
+	private Model model;
 
 	@Test
 	 void findAllBooksTest() {
@@ -148,6 +152,7 @@ class LibrarySystemApplicationTests {
 	}
 
 
+
 	//------------------------------TESTING CATEGORY CONTROLLER
 
 
@@ -178,6 +183,18 @@ class LibrarySystemApplicationTests {
 		verify(categoryRepository, times(1)).deleteById(id);
 	}
 
+
+
+	@Test
+	void addCategoryFormTest()
+	{
+		CategoryController categoryController=new CategoryController();
+		String response=categoryController.addCategoryForm(model);
+		Assertions.assertEquals("add-category-form",response);
+	}
+
+
+
 	//------------------------------TESTING HOME CONTROLLER
 
 	@Test
@@ -194,7 +211,8 @@ class LibrarySystemApplicationTests {
 		Assertions.assertEquals("logout-success", response);
 	}
 
-	//------------------------------TESTING HOME CONTROLLER
+
+	//------------------------------TESTING USER LOGIN CONTROLLER
 
 	@Test
 	 void welcome()
@@ -202,6 +220,26 @@ class LibrarySystemApplicationTests {
 		UserLoginController userLoginController=new UserLoginController();
 		String response=userLoginController.welcome();
 		Assertions.assertEquals("welcome",response);
+	}
+
+
+	@Test
+	void showLoginForm()
+	{
+		UserLoginController userLoginController=new UserLoginController();
+		String response=userLoginController.showLoginForm(model);
+		Assertions.assertEquals("login-form",response);
+	}
+
+	//------------------------------TESTING USER REGISTRATION CONTROLLER
+
+
+	@Test
+	void showRegisterForm()
+	{
+		UserRegistrationController userRegistrationController=new UserRegistrationController();
+		String response=userRegistrationController.showRegisterForm(model);
+		Assertions.assertEquals("register-form",response);
 	}
 
 
